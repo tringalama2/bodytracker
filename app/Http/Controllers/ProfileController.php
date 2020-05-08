@@ -43,7 +43,7 @@ class ProfileController extends Controller
 
       $profile = Profile::create($validAttributes);
 
-      return redirect(route('profile.edit'));
+      return redirect(route('entries.index'));
     }
 
 
