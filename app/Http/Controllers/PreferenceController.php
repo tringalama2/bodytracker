@@ -43,7 +43,9 @@ class PreferenceController extends Controller
 
       $preference = Preference::create($validAttributes);
 
-      return redirect(route('preference.edit'));
+      $request->session()->flash('info', 'Great!  Now let\'s wrap up with a little more about you.');
+      
+      return redirect(route('profile.create'));
     }
 
     /**

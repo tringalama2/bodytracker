@@ -43,6 +43,8 @@ class ProfileController extends Controller
 
       $profile = Profile::create($validAttributes);
 
+      $request->session()->flash('info', 'That\'s it!  You are ready to start logging entries.');
+
       return redirect(route('entries.index'));
     }
 

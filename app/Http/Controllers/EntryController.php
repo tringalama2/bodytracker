@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class EntryController extends Controller
 {
@@ -51,6 +52,8 @@ class EntryController extends Controller
 
       Entry::create($validAttributes);
 
+      $request->session()->flash('success', 'Entry was saved.');
+
       return redirect(route('entries.index'));
     }
 
@@ -91,8 +94,10 @@ class EntryController extends Controller
     {
       //check that user is owner of record
       // TBD
-      
+
       $entry->update($this->validateEntry());
+
+      $request->session()->flash('success', 'Entry was updated.');
 
       return redirect(route('entries.show', compact('entry')));
     }
@@ -107,8 +112,12 @@ class EntryController extends Controller
     {
       //check that user is owner of record
       // TBD
-      ddd('oops!');
+
+
+
       $entry->delete();
+
+      Session::flash('success', 'Entry was deleted.');
 
       return redirect(route('entries.index'));
     }

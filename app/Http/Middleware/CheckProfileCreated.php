@@ -17,6 +17,7 @@ class CheckProfileCreated
     public function handle($request, Closure $next)
     {
       if ($request->user()->hasPreference() == false) {
+        $request->session()->flash('info', 'Before we get started, I need a little information about your preferences.');
         return Redirect::route('preference.create');
         //return redirect(route('preference.create'));
       } elseif ($request->user()->hasProfile() == false) {
