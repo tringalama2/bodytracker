@@ -29,6 +29,16 @@ class Preference extends Model
       return $this->belongsTo('App\User');
   }
 
+  public function lengthUnitLabel()
+  {
+    return $this->prefersImperial() ? 'in' : 'cm';
+  }
+
+  public function weightUnitLabel()
+  {
+    return $this->prefersImperial() ? 'lb' : 'kg';
+  }
+
   public function prefersMetric()
   {
     return (int)$this->unit_dipslay_preference_id==self::METRIC_SYSTEM_ID;

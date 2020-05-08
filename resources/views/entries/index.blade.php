@@ -26,9 +26,9 @@
                     <tbody>
                       <tr>
                         <td><a href="{{ route('entries.show', compact('entry')) }}">{{$entry->entry_date->format('l, F j, Y ') }}</a></td>
-                        <td>{{ $entry->weight }} {{ auth()->user()->profile->prefersMetriclUnits ? 'kg' : 'lb' }}</td>
-                        <td>{{ $entry->chest_circ_in }}</td>
-                        <td>{{ $entry->waist_circ_in }}</td>
+                        <td>{{ $entry->weight }} {{ auth()->user()->preference->weightUnitLabel() }}</td>
+                        <td>{{ $entry->chestCirc }} {{ auth()->user()->preference->lengthUnitLabel() }}</td>
+                        <td>{{ $entry->waistCirc }} {{ auth()->user()->preference->lengthUnitLabel() }}</td>
                       </tr>
                     </tbody>
 

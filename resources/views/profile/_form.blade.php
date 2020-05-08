@@ -39,7 +39,7 @@
         <div class="control">
           <a class="button is-static">
             <!-- User Units -->
-            {{ auth()->user()->preference->prefersMetric() ? 'cm' : 'in' }}
+            {{ auth()->user()->preference->lengthUnitLabel() }}
           </a>
         </div>
       </div>
@@ -58,7 +58,7 @@
       </div>
       <div class="control">
         <a class="button is-static">
-        {{ auth()->user()->preference->prefersMetric() ? 'kg' : 'lb' }}
+        {{ auth()->user()->preference->weightUnitLabel() }}
         </a>
       </div>
     </div>

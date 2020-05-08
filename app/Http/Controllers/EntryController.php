@@ -14,7 +14,7 @@ class EntryController extends Controller
         $this->middleware('verified');
         $this->middleware('profile');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -64,8 +64,6 @@ class EntryController extends Controller
     {
       return view ('entries.show', [
         'entry' => $entry,
-        'preferredUnits' => Profile::units(auth()->user()->profile->unit_dipslay_preference_id),
-        'unit_system' => auth()->user()->profile->unit_dipslay_preference_id,
       ]);
     }
 
@@ -93,7 +91,7 @@ class EntryController extends Controller
     {
       //check that user is owner of record
       // TBD
-
+      
       $entry->update($this->validateEntry());
 
       return redirect(route('entries.show', compact('entry')));
@@ -109,7 +107,7 @@ class EntryController extends Controller
     {
       //check that user is owner of record
       // TBD
-
+      ddd('oops!');
       $entry->delete();
 
       return redirect(route('entries.index'));

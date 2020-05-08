@@ -32,16 +32,44 @@ class Entry extends Model
 
   public function getWeightAttribute()
   {
-    if ($this->userPrefersImperial())
+    if (auth()->user()->preference->prefersImperial()) {
       return $this->weight_lbs;
-    else {
+    } else {
       return Preference::poundsToKilograms($this->weight_lbs);
+    }
+  }
+
+  public function getChestCircAttribute()
+  {
+    if (auth()->user()->preference->prefersImperial()) {
+      return $this->chest_circ_in;
+    } else {
+      return Preference::inchesToCentimeters($this->chest_circ_in);
+    }
+  }
+
+  public function getWaistCircAttribute()
+  {
+    if (auth()->user()->preference->prefersImperial()) {
+      return $this->waist_circ_in;
+    } else {
+      return Preference::inchesToCentimeters($this->waist_circ_in);
     }
   }
 
   public function setWeightLbsAttribute($value)
   {
-    $this->attributes['weight_lbs'] = $this->userPrefersImperial() ? $value : Preference::kilogramsToPounds($value);
+    $this->attributes['weight_lbs'] = auth()->user()->preference->prefersImperial() ? $value : Preference::kilogramsToPounds($value);
+  }
+
+  public function setChestCircInAttribute($value)
+  {
+    $this->attributes['chest_circ_in'] = auth()->user()->preference->prefersImperial() ? $value : Preference::centimetersToInches($value);
+  }
+
+  public function setWaistCircInAttribute($value)
+  {
+    $this->attributes['waist_circ_in'] = auth()->user()->preference->prefersImperial() ? $value : Preference::centimetersToInches($value);
   }
 
   public function userPrefersImperial()
