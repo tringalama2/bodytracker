@@ -17,7 +17,7 @@ class Preference extends Model
    * @var array
    */
   protected $fillable = [
-      'unit_dipslay_preference_id',
+      'user_id', 'unit_dipslay_preference_id',
   ];
 
   protected $casts = [

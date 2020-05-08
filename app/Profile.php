@@ -11,10 +11,6 @@ class Profile extends Model
   const MALE='m';
   const FEMALE='f';
 
-  function __construct() {
-
-      //ddd(auth()->user()->preference);
-  }
   /**
    * The attributes that are mass assignable.
    *
