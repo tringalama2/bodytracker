@@ -30,6 +30,42 @@ class Entry extends Model
       return $this->belongsTo('App\User');
   }
 
+  public function getWeight($withUnits = false)
+  {
+    return $this->getMeasurement($this->weight_lbs, 'weight', $withUnits);
+  }
+
+  public function getChestCirc($withUnits = false)
+  {
+    return $this->getMeasurement($this->chest_circ_in, 'length', $withUnits);
+  }
+
+  public function getWaistCirc($withUnits = false)
+  {
+    return $this->getMeasurement($this->waist_circ_in, 'length', $withUnits);
+  }
+
+  public function getMeasurement($measurement, $type = 'length', $withUnits = false)
+  {
+    $label = $type == 'length' ?
+      auth()->user()->preference->lengthUnitLabel() :
+      auth()->user()->preference->weightUnitLabel();
+
+    $measurement = auth()->user()->preference->prefersImperial() ?
+      $measurement :
+      (
+        $type == 'length' ?
+        Preference::inchesToCentimeters($measurement) :
+        Preference::poundsToKilograms($measurement)
+      );
+
+    if (!$withUnits) {
+      return $measurement;
+    } else {
+      return $measurement == null ? null : $measurement.' '.$label;
+    }
+  }
+
   public function getWeightAttribute()
   {
     if (auth()->user()->preference->prefersImperial()) {
@@ -72,9 +108,29 @@ class Entry extends Model
     $this->attributes['waist_circ_in'] = auth()->user()->preference->prefersImperial() ? $value : Preference::centimetersToInches($value);
   }
 
-  public function userPrefersImperial()
-  {
-    return auth()->user()->profile->unit_dipslay_preference_id==Preference::IMPERIAL_SYSTEM_ID;
-  }
-
+  //
+  //
+  // public function convertWithDisplayUnits($attr, $type)
+  // {
+  //   if ($this->attributes[$attr] == null) {
+  //     return null;
+  //   } else {
+  //     if ($type = 'length' || $type = 'len') {
+  //       return (
+  //         auth()->user()->preference->prefersImperial() ?
+  //           $this->attributes[$attr] :
+  //           Preference::inchesToCentimeters($this->attributes[$attr])
+  //         )
+  //         . ' ' . auth()->user()->preference->lengthUnitLabel();
+  //     } else {
+  //       return (
+  //         auth()->user()->preference->prefersImperial() ?
+  //           $this->attributes[$attr] :
+  //           Preference::poundsToKilograms($this->attributes[$attr])
+  //         )
+  //         . ' ' . auth()->user()->preference->weightUnitLabel();
+  //     }
+  //   }
+  //
+  // }
 }

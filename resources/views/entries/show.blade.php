@@ -21,15 +21,15 @@
                       </tr>
                       <tr>
                         <td>Weight</td>
-                        <td>{{ $entry->weight }} {{ auth()->user()->preference->weightUnitLabel() }}</td>
+                        <td>{{ $entry->getWeight(true) }}</td>
                       <tr>
                       </tr>
                         <td>Chest Circumference</td>
-                        <td>{{ $entry->chestCirc }} {{ auth()->user()->preference->lengthUnitLabel() }}</td>
+                        <td>{{ $entry->getChestCirc(true) }}</td>
                       <tr>
                       </tr>
                         <td>Waist Circumference</td>
-                        <td>{{ $entry->waistCirc }} {{ auth()->user()->preference->lengthUnitLabel() }}</td>
+                        <td>{{ $entry->getWaistCirc(true) }}</td>
                       </tr>
                     </tbody>
                   </table>

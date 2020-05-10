@@ -26,9 +26,9 @@
                     <tbody>
                       <tr>
                         <td><a href="{{ route('entries.show', compact('entry')) }}">{{$entry->entry_date->format('l, F j, Y ') }}</a></td>
-                        <td>{{ $entry->weight }} {{ auth()->user()->preference->weightUnitLabel() }}</td>
-                        <td>{{ $entry->chestCirc }} {{ auth()->user()->preference->lengthUnitLabel() }}</td>
-                        <td>{{ $entry->waistCirc }} {{ auth()->user()->preference->lengthUnitLabel() }}</td>
+                        <td>{{ $entry->getWeight(true) }}</td>
+                        <td>{{ $entry->getChestCirc(true) }}</td>
+                        <td>{{ $entry->getWaistCirc(true) }}</td>
                       </tr>
                     </tbody>
 
