@@ -121,6 +121,7 @@ class Entry extends Model
       auth()->user()->profile->height_in
     ), 1);
   }
+
   public function getBMIDesc()
   {
     return $this->BMItoDesc($this->getBMI());
@@ -143,6 +144,11 @@ class Entry extends Model
   	}
   }
 
+  public function isObese()
+  {
+    return $this->getBMI() >= 30;
+  }
+
   public function getBSA()
   {
     return round($this->calculateBSA(
@@ -151,12 +157,26 @@ class Entry extends Model
     ), 2);
   }
 
-
   public function calculateBSA($height_in, $weight_lbs)
   {
     // Body surface area (the Mosteller formula), m2 = [ Height, cm x Weight, kg  / 3600 ]^1/2
     return (Preference::inchesToCentimeters($height_in) * Preference::poundsToKilograms($weight_lbs) / 3600) ** 0.5;
   }
+
+  public function calculateBEE()
+  {
+    // Basal Energy Expenditure
+    // Note: The Basal Energy Expenditure must be multiplied by activity and stress factors to calculate total caloric requirement.
+    // BEE, kcal/day (male) = 66.5 + (13.75 × weight, kg) + (5.003 × height, cm) - (6.775 × age)
+    // BEE, kcal/day (female) = 655.1 + (9.563 × weight, kg) + (1.850 × height, cm) - (4.676 × age)
+    // Harris-Benedict adjustment:
+    // • Sedentary (little to no exercise) = BEE × 1.2
+    // • Light exercise (1-3 days per week) = BEE × 1.375
+    // • Moderate exercise (3–5 days per week) = BEE × 1.55
+    // • Heavy exercise (6–7 days per week) = BEE × 1.725
+    // Very heavy exercise (twice per day, extra heavy workouts) = BEE × 1.9
+  }
+
 
 
   //

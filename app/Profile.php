@@ -79,4 +79,41 @@ class Profile extends Model
     return $this->gender==self::FEMALE;
   }
 
+  public function calculateIBWkg(string $gender, float $height_in)
+  {
+    // Ideal Body Weight (Devine formula):
+    // • Ideal body weight (IBW) (men) = 50 kg + 2.3 kg x (height, in - 60)
+    // • Ideal body weight (IBW) (women) = 45.5 kg + 2.3 kg x  (height, in - 60)
+    // • Note: this formula is only an approximation, and is generally only applicable for people 60 inches (5 foot) tall or greater. For patients under 5 feet, one commonly-used modification is to subtract 2-5 lbs for each inch below 60 inches (written communication with leading expert Dr. Manjunath Pai, 2018).
+    $genderBasedAddKg = strtolower(substr($gender, 0, 1)) == 'm' ? 50 : 45.5;
+
+    return (2.3 * ($height_in - 60)) + $genderBasedAddKg;
+  }
+
+  public function calculateIBWlbs(string $gender, float $height_in)
+  {
+    return Preference::kilogramsToPounds($this->calculateIBWkg($gender, $height_in));
+  }
+
+  public function getIBW()
+  {
+    if (auth()->user()->preference->prefersImperial()) {
+      return round($this->calculateIBWlbs(
+        $this->gender,
+        $this->height_in
+      ), 0);
+    } else {
+      return round($this->calculateIBWkg(
+        $this->gender,
+        $this->height_in
+      ), 0);
+    }
+  }
+
+  public function calculateABW()
+  {
+    // Adjusted Body Weight (ABW), for use in obese patients (where actual body weight > IBW):
+    // • ABW = IBW + 0.4 x (actual body weight - IBW)
+
+  }
 }
