@@ -26,7 +26,21 @@
                     <tbody>
                       <tr>
                         <td><a href="{{ route('entries.show', compact('entry')) }}">{{$entry->entry_date->format('l, F j, Y ') }}</a></td>
-                        <td>{{ $entry->getWeight(true) }}</td>
+                        <td>
+                          <div>
+                          {{ $entry->getWeight(true) }}
+                          </div>
+                          @isset($entry->weight_lbs)
+                          <div>
+                              <span class="is-size-7">BMI {{ $entry->getBMI() }}</span>
+                              <span class="is-size-7">kg/m&#178;</span>
+                          </div>
+                          <div>
+                              <span class="is-size-7">BSA {{ $entry->getBSA() }}</span>
+                              <span class="is-size-7">m&#178;</span>
+                          </div>
+                          @endisset
+                        </td>
                         <td>{{ $entry->getChestCirc(true) }}</td>
                         <td>{{ $entry->getWaistCirc(true) }}</td>
                       </tr>
