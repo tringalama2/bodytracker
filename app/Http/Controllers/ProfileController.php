@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use App\Entry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,14 @@ class ProfileController extends Controller
       $validAttributes['user_id'] = Auth::id();
 
       $profile = Profile::create($validAttributes);
+
+
+      // save starting weight to an entry
+      Entry::create([
+        'user_id' => Auth::id(),
+        'entry_date' => now(),
+        'weight_lbs' => $validAttributes['start_weight_lbs'],
+        ]);
 
       $request->session()->flash('info', 'That\'s it!  You are ready to start logging entries.');
 
