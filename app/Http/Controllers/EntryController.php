@@ -52,7 +52,7 @@ class EntryController extends Controller
 
       Entry::create($validAttributes);
 
-      $request->session()->flash('success', 'Entry was saved.');
+      $request->session()->flash('success', 'Entry has been saved.');
 
       return redirect(route('entries.index'));
     }
@@ -97,7 +97,7 @@ class EntryController extends Controller
 
       $entry->update($this->validateEntry());
 
-      $request->session()->flash('success', 'Entry was updated.');
+      $request->session()->flash('success', 'Entry has been updated.');
 
       return redirect(route('entries.show', compact('entry')));
     }

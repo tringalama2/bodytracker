@@ -44,7 +44,7 @@ class PreferenceController extends Controller
       $preference = Preference::create($validAttributes);
 
       $request->session()->flash('info', 'Great!  Now let\'s wrap up with a little more about you.');
-      
+
       return redirect(route('profile.create'));
     }
 
@@ -76,6 +76,8 @@ class PreferenceController extends Controller
     public function update(Request $request, Preference $preference)
     {
       auth()->user()->preference->update($this->validatePreference());
+
+      $request->session()->flash('success', 'Preferences have been saved.');
 
       return redirect(route('preference.edit'));
     }
