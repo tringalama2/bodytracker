@@ -17,12 +17,21 @@ class Profile extends Model
    * @var array
    */
   protected $fillable = [
-      'user_id', 'gender', 'height_in', 'start_weight_lbs',
+      'user_id', 'gender', 'birth_date', 'height_in', 'start_weight_lbs',
   ];
 
   protected $casts = [
       'height_in' => 'decimal:2',
       'start_weight_lbs' => 'decimal:1',
+  ];
+
+  /**
+   * The attributes that should be mutated to dates.
+   *
+   * @var array
+   */
+  protected $dates = [
+      'birth_date',
   ];
 
   public function user()

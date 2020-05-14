@@ -87,6 +87,8 @@ class ProfileController extends Controller
     {
       auth()->user()->profile->update($this->validateProfile());
 
+      $request->session()->flash('success', 'Profile has been saved.');
+
       return redirect(route('profile.edit'));
     }
 
@@ -94,6 +96,7 @@ class ProfileController extends Controller
     {
       return request()->validate([
         'gender' => 'required|in:m,f',
+        'birth_date' => 'required|date',
         'height_in' => 'numeric',
         'start_weight_lbs' => 'numeric',
       ]);

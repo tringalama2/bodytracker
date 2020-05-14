@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->char('gender', 1);
+            $table->date('birth_date', 1);
             $table->decimal('height_in', 10, 2);
             $table->decimal('start_weight_lbs', 10, 1);
             $table->timestamps();

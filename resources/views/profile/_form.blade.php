@@ -29,6 +29,18 @@
   </div>
 
   <div class="field">
+    <label class="label" for="birth_date">Birth Date</label>
+    <div class="control">
+      <input id="birth_date" name="birth_date" type="text"
+        value="{{ old('birth_date', isset($profile->birth_date) ? $profile->birth_date->format('m/d/Y') : '') }}"
+        class="input @error('birth_date') is-danger @enderror">
+    </div>
+    @error('birth_date')
+        <p class="help is-danger">{{ $message }}</p>
+    @enderror
+  </div>
+
+  <div class="field">
     <label class="label" for="height_in">Height</label>
     <div class="field has-addons">
         <div class="control is-expanded">
