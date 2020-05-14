@@ -99,4 +99,34 @@
 
   </div>
 
+@isset($latestEntry)
+    <div class="field">
+      <label class="label">Current Weight</label>
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input type="text" value="{{ $latestEntry->getWeight() }}"
+            class="input is-info" disabled>
+        </div>
+        <div class="control">
+          <a class="button is-static">
+            {{ auth()->user()->preference->weightUnitLabel() }}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">BMI</label>
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input type="text" value="{{ $latestEntry->getBMI() }} - {{ $latestEntry->getBMIDesc() }}"
+            class="input is-info" disabled>
+        </div>
+        <div class="control">
+          <a class="button is-static">
+            kg/m&#178;
+          </a>
+        </div>
+      </div>
+    </div>
+@endisset
 </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Profile;
 use App\Entry;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,8 +72,11 @@ class ProfileController extends Controller
           return redirect(route('profile.create'));
       }
 
+      $latestEntry = auth()->user()->latestEntry;
+
       return view ('profile.edit', [
         'profile' => auth()->user()->profile,
+        'latestEntry' => $latestEntry,
       ]);
     }
 

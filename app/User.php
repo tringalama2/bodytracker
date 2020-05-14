@@ -52,6 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Entry');
     }
 
+    public function latestEntry()
+    {
+        return $this->hasOne('App\Entry')->latest();
+    }
+
     public function hasPreference()
     {
         return ! is_null($this->preference);
