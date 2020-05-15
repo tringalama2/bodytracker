@@ -54,7 +54,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function latestEntry()
     {
-        return $this->hasOne('App\Entry')->latest();
+        return $this->hasOne('App\Entry')
+              ->orderBy('entry_date', 'desc')
+              ->orderBy('created_at', 'desc');
     }
 
     public function hasPreference()
