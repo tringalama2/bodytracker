@@ -24,7 +24,10 @@ class EntryController extends Controller
     public function index()
     {
       return view ('entries.index', [
-        'entries' => Entry::where('user_id', Auth::id())->latest('entry_date')->get(),
+        'entries' => Entry::where('user_id', Auth::id())
+              ->orderBy('entry_date', 'desc')
+              ->orderBy('created_at', 'desc')
+              ->get(),
       ]);
     }
 
