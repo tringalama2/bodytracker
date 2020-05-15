@@ -163,45 +163,82 @@ class Entry extends Model
     return (Preference::inchesToCentimeters($height_in) * Preference::poundsToKilograms($weight_lbs) / 3600) ** 0.5;
   }
 
-  public function calculateBEE()
+  public function calculateBEE(int $age, string $gender, float $height_in, float $weight_lbs)
   {
     // Basal Energy Expenditure
     // Note: The Basal Energy Expenditure must be multiplied by activity and stress factors to calculate total caloric requirement.
     // BEE, kcal/day (male) = 66.5 + (13.75 × weight, kg) + (5.003 × height, cm) - (6.775 × age)
     // BEE, kcal/day (female) = 655.1 + (9.563 × weight, kg) + (1.850 × height, cm) - (4.676 × age)
+
+    $weight_kg = Preference::poundsToKilograms($weight_lbs);
+    $height_cm = Preference::inchesToCentimeters($height_in);
+
+    if (strtolower(substr($gender, 0, 1)) == 'm')
+    {
+      return 66.5 + (13.75 * $weight_kg) + (5.003 * $height_cm) - (6.775 * $age);
+    } else {
+      return 655.1 + (9.563 * $weight_kg) + (1.850 * $height_cm) - (4.676 * $age);
+    }
+  }
+
+  public function calculateHarrisBenedict(int $age, string $gender, float $height_in, float $weight_lbs, int $activity_level = 2)
+  {
     // Harris-Benedict adjustment:
     // • Sedentary (little to no exercise) = BEE × 1.2
     // • Light exercise (1-3 days per week) = BEE × 1.375
     // • Moderate exercise (3–5 days per week) = BEE × 1.55
     // • Heavy exercise (6–7 days per week) = BEE × 1.725
-    // Very heavy exercise (twice per day, extra heavy workouts) = BEE × 1.9
+    // • Very heavy exercise (twice per day, extra heavy workouts) = BEE × 1.9
+
+    // $activity level
+    // 1 = Sedentary
+    // 2 = light
+    // 3 = mod
+    // 4 = Heavy
+    // 5 = very heavy
+    switch ($activity_level) {
+      case 1:
+        $activity_adj = 1.2;
+        break;
+      case 2:
+        $activity_adj = 1.375;
+        break;
+      case 3:
+        $activity_adj = 1.55;
+        break;
+      case 4:
+        $activity_adj = 1.725;
+        break;
+      case 5:
+        $activity_adj = 1.9;
+        break;
+      default:
+        $activity_adj = 1.375;
+        break;
+    }
+
+    return $activity_adj * $this->getBEE($age, $gender, $height_in, $weight_lbs);
   }
 
+  public function getBEE()
+  {
+    return round($this->calculateBEE(
+      auth()->user()->profile->birth_date->age,
+      auth()->user()->profile->gender,
+      auth()->user()->profile->height_in,
+      $this->weight_lbs
+    ), 0);
+  }
 
+  public function getHarrisBenedict()
+  {
+    return round($this->calculateHarrisBenedict(
+      auth()->user()->profile->birth_date->age,
+      auth()->user()->profile->gender,
+      auth()->user()->profile->height_in,
+      $this->weight_lbs,
+      auth()->user()->profile->activityLevel->id
+    ), 0);
+  }
 
-  //
-  //
-  // public function convertWithDisplayUnits($attr, $type)
-  // {
-  //   if ($this->attributes[$attr] == null) {
-  //     return null;
-  //   } else {
-  //     if ($type = 'length' || $type = 'len') {
-  //       return (
-  //         auth()->user()->preference->prefersImperial() ?
-  //           $this->attributes[$attr] :
-  //           Preference::inchesToCentimeters($this->attributes[$attr])
-  //         )
-  //         . ' ' . auth()->user()->preference->lengthUnitLabel();
-  //     } else {
-  //       return (
-  //         auth()->user()->preference->prefersImperial() ?
-  //           $this->attributes[$attr] :
-  //           Preference::poundsToKilograms($this->attributes[$attr])
-  //         )
-  //         . ' ' . auth()->user()->preference->weightUnitLabel();
-  //     }
-  //   }
-  //
-  // }
 }

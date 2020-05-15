@@ -7,6 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Profile::class, function (Faker $faker) {
     return [
+        'user_id' => factory(App\User::class),
+        'activity_level_id' => factory(App\ActivityLevel::class),
         'gender' => $faker->randomElement($array = array ('m','f')),
         'birth_date' => $faker->dateTimeInInterval(
             $startDate = '-70 years',

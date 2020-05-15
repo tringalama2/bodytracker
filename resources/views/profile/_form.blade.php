@@ -79,6 +79,27 @@
     @enderror
   </div>
 
+  <div class="field">
+    <label class="label" for="activity_level_id">Activity Level</label>
+    <div class="field">
+      <div class="control is-expanded">
+        <select class="input @error('activity_level_id') is-danger @enderror"
+          id="activity_level_id" name="activity_level_id">
+          @foreach($activityLevels as $level)
+            <option value="{{$level->id}}"
+              @if (old('activity_level_id', $profile->activity_level_id ?? '')==$level->id)
+              selected
+              @endif
+              >{{$level->labelAndDesc}}</option>
+          @endforeach
+        </select>
+      </div>
+    </div>
+    @error('activity_level_id')
+        <p class="help is-danger">{{ $message }}</p>
+    @enderror
+  </div>
+
   <div class="field is-grouped buttons">
     <div class="control">
       <button type="submit" class="button is-link">
@@ -141,6 +162,36 @@
         <div class="control">
           <a class="button is-static">
             kg/m&#178;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Basal Energy Expenditure</label>
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input type="text" value="{{ $latestEntry->getBEE() }}"
+            class="input is-info" disabled>
+        </div>
+        <div class="control">
+          <a class="button is-static">
+            kcal/day
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Harris-Benedict Recommended Caloric Intake</label>
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input type="text" value="{{ $latestEntry->getHarrisBenedict() }}"
+            class="input is-info" disabled>
+        </div>
+        <div class="control">
+          <a class="button is-static">
+            kcal/day
           </a>
         </div>
       </div>

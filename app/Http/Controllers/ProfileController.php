@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Profile;
 use App\Entry;
 use App\User;
+use App\ActivityLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
-      return view ('profile.create');
+      $activityLevels = ActivityLevel::orderBy('id')->get();
+
+      return view ('profile.create', compact('activityLevels'));
     }
 
     /**
@@ -74,9 +77,12 @@ class ProfileController extends Controller
 
       $latestEntry = auth()->user()->latestEntry;
 
+      $activityLevels = ActivityLevel::orderBy('id')->get();
+
       return view ('profile.edit', [
         'profile' => auth()->user()->profile,
         'latestEntry' => $latestEntry,
+        'activityLevels' => $activityLevels,
       ]);
     }
 
@@ -99,6 +105,7 @@ class ProfileController extends Controller
     protected function validateProfile()
     {
       return request()->validate([
+        'activity_level_id' => 'required|between:1,5',
         'gender' => 'required|in:m,f',
         'birth_date' => 'required|date',
         'height_in' => 'numeric',

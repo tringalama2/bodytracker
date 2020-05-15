@@ -17,7 +17,7 @@ class Profile extends Model
    * @var array
    */
   protected $fillable = [
-      'user_id', 'gender', 'birth_date', 'height_in', 'start_weight_lbs',
+      'user_id', 'activity_level_id', 'gender', 'birth_date', 'height_in', 'start_weight_lbs',
   ];
 
   protected $casts = [
@@ -37,6 +37,11 @@ class Profile extends Model
   public function user()
   {
       return $this->belongsTo('App\User');
+  }
+
+  public function activityLevel()
+  {
+      return $this->belongsTo('App\ActivityLevel');
   }
 
   public function getStartWeightAttribute()

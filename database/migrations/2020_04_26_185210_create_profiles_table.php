@@ -16,6 +16,7 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('activity_level_id');
             $table->char('gender', 1);
             $table->date('birth_date', 1);
             $table->decimal('height_in', 10, 2);
