@@ -35,10 +35,6 @@
                               <span class="is-size-7">BMI {{ $entry->getBMI() }}</span>
                               <span class="is-size-7">kg/m&#178;</span>
                           </div>
-                          <div>
-                              <span class="is-size-7">BSA {{ $entry->getBSA() }}</span>
-                              <span class="is-size-7">m&#178;</span>
-                          </div>
                           @endisset
                         </td>
                         <td>{{ $entry->getChestCirc(true) }}</td>

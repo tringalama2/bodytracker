@@ -153,7 +153,7 @@
     </div>
 
     <div class="field">
-      <label class="label">BMI</label>
+      <label class="label">Body Mass Index (BMI)</label>
       <div class="field has-addons">
         <div class="control is-expanded">
           <input type="text" value="{{ $latestEntry->getBMI() }} - {{ $latestEntry->getBMIDesc() }}"
@@ -162,6 +162,21 @@
         <div class="control">
           <a class="button is-static">
             kg/m&#178;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Body Surface Area</label>
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input type="text" value="{{ $latestEntry->getBSA() }}"
+            class="input is-info" disabled>
+        </div>
+        <div class="control">
+          <a class="button is-static">
+            m&#178;
           </a>
         </div>
       </div>
