@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Create Your Profile</div>
+                <div class="card-header text-white bg-primary">Create Your Profile</div>
 
                 <div class="card-body">
                   @include('profile._form')
