@@ -9,11 +9,13 @@
 
   <div class="field">
     <label class="label" for="entry_date">Entry Date</label>
+    <div class="field has-addons">
     <div class="control">
       <input id="entry_date" name="entry_date" type="text"
         value="{{ old('entry_date', isset($entry->entry_date) ? $entry->entry_date->format('m/d/Y') : '') }}"
         class="input @error('entry_date') is-danger @enderror">
     </div>
+  </div>
     @error('entry_date')
         <p class="help is-danger">{{ $message }}</p>
     @enderror
@@ -22,7 +24,7 @@
   <div class="field">
     <label class="label" for="weight_lbs">Weight</label>
     <div class="field has-addons">
-      <div class="control is-expanded">
+      <div class="control">
         <input id="weight_lbs" name="weight_lbs" type="text"
           value="{{ old('weight_lbs', $entry->weight ?? '') }}"
           class="input @error('weight_lbs') is-danger @enderror">
@@ -42,7 +44,7 @@
   <div class="field">
     <label class="label" for="chest_circ_in">Chest Circumference</label>
     <div class="field has-addons">
-      <div class="control is-expanded">
+      <div class="control">
         <input id="chest_circ_in" name="chest_circ_in" type="text"
           value="{{ old('chest_circ_in', $entry->chestCirc ?? '') }}"
           class="input @error('chest_circ_in') is-danger @enderror">
@@ -61,7 +63,7 @@
   <div class="field">
     <label class="label" for="waist_circ_in">Waist Circumference</label>
     <div class="field has-addons">
-      <div class="control is-expanded">
+      <div class="control">
         <input id="waist_circ_in" name="waist_circ_in" type="text"
           value="{{ old('waist_circ_in', $entry->waistCirc ?? '') }}"
           class="input @error('waist_circ_in') is-danger @enderror">

@@ -21,7 +21,7 @@
                       <div class="field">
                         <label class="label">Current Weight</label>
                         <div class="field has-addons">
-                          <div class="control is-expanded">
+                          <div class="control">
                             <input type="text" value="{{ $latestEntry->getWeight() }}"
                               class="input is-info" disabled>
                           </div>
@@ -36,7 +36,7 @@
                       <div class="field">
                         <label class="label">Ideal Body Weight</label>
                         <div class="field has-addons">
-                          <div class="control is-expanded">
+                          <div class="control">
                             <input type="text"
                               value="{{ $profile->getIBW() }}"
                               class="input is-info" disabled>
@@ -52,7 +52,7 @@
                       <div class="field">
                         <label class="label">Body Mass Index (BMI)</label>
                         <div class="field has-addons">
-                          <div class="control is-expanded">
+                          <div class="control">
                             <input type="text" value="{{ $latestEntry->getBMI() }} - {{ $latestEntry->getBMIDesc() }}"
                               class="input is-info" disabled>
                           </div>
@@ -67,7 +67,7 @@
                       <div class="field">
                         <label class="label">Body Surface Area</label>
                         <div class="field has-addons">
-                          <div class="control is-expanded">
+                          <div class="control">
                             <input type="text" value="{{ $latestEntry->getBSA() }}"
                               class="input is-info" disabled>
                           </div>
@@ -82,7 +82,7 @@
                       <div class="field">
                         <label class="label">Basal Energy Expenditure</label>
                         <div class="field has-addons">
-                          <div class="control is-expanded">
+                          <div class="control">
                             <input type="text" value="{{ $latestEntry->getBEE() }}"
                               class="input is-info" disabled>
                           </div>
@@ -97,7 +97,7 @@
                       <div class="field">
                         <label class="label">Harris-Benedict Recommended Caloric Intake</label>
                         <div class="field has-addons">
-                          <div class="control is-expanded">
+                          <div class="control">
                             <input type="text" value="{{ $latestEntry->getHarrisBenedict() }}"
                               class="input is-info" disabled>
                           </div>
