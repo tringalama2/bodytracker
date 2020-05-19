@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">All Entries</div>
+                <div class="card-header text-white bg-primary">All Entries</div>
 
                 <div class="card-body">
                   <div class="buttons is-pulled-right">
@@ -58,7 +58,46 @@
 
                 </div>
             </div>
+            <div class="card mt-5">
+                <div class="card-header text-white bg-secondary">Weight Trend</div>
+
+                <div class="card-body">
+                  <canvas id="myChart"></canvas>
+                </div>
+            </div>
         </div>
+
+
     </div>
 </div>
+
+
+@endsection
+
+@section('scripts')
+  @parent
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script>
+    window.onload = function() {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: {!! json_encode($entries->pluck('entry_date')->transform(function ($item, $key) { return $item->format('F j, Y '); })->toArray()) !!},
+            datasets: [{
+                label: 'Weight Lbs Trend',
+                backgroundColor: 'rgb(40, 167, 69)',
+                borderColor: 'rgb(40, 167, 69)',
+                data: {!! json_encode($entries->pluck('weight_lbs')->transform(function ($item, $key) { return (float)$item; })->toArray()) !!}
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+      });
+    };
+  </script>
 @endsection

@@ -20,10 +20,6 @@
     <!-- Bulma quick and dirty -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="{{ asset('js/my.js') }}" defer></script>
 </head>
 <body>
     <div id="app">
@@ -104,5 +100,11 @@
             @yield('content')
         </main>
     </div>
+  <!-- Scripts -->
+  @section('scripts')
+  <script src="{{ asset('js/app.js') }}" defer></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="{{ asset('js/my.js') }}" defer></script>
+  @show
 </body>
 </html>
