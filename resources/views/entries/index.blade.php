@@ -86,12 +86,12 @@
 
         // The data for our dataset
         data: {
-            labels: {!! json_encode($entries->pluck('entry_date')->transform(function ($item, $key) { return $item->format('F j, Y '); })->toArray()) !!},
+            labels: {!! $jsonEntryDates !!},
             datasets: [{
-                label: 'Weight Lbs Trend',
+                label: 'Weight Trend',
                 backgroundColor: 'rgb(40, 167, 69)',
                 borderColor: 'rgb(40, 167, 69)',
-                data: {!! json_encode($entries->pluck('weight_lbs')->transform(function ($item, $key) { return (float)$item; })->toArray()) !!}
+                data: {!! $jsonWeightLbs !!}
             }]
         },
 

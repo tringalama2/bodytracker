@@ -23,11 +23,21 @@ class EntryController extends Controller
      */
     public function index()
     {
+      $entries = Entry::where('user_id', Auth::id())
+            ->orderBy('entry_date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
       return view ('entries.index', [
-        'entries' => Entry::where('user_id', Auth::id())
-              ->orderBy('entry_date', 'desc')
-              ->orderBy('created_at', 'desc')
-              ->get(),
+        'entries' => $entries,
+        'jsonEntryDates' => json_encode($entries->pluck('entry_date')
+              ->transform(function ($item, $key) {
+                  return $item->format('F j, Y ');
+             })->toArray()),
+        'jsonWeightLbs' => json_encode($entries->pluck('weight')
+              ->transform(function ($item, $key) {
+                  return (float)$item;
+                })->toArray())
       ]);
     }
 
