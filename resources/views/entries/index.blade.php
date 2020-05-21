@@ -88,15 +88,23 @@
         data: {
             labels: {!! $jsonEntryDates !!},
             datasets: [{
-                label: 'Weight Trend',
-                backgroundColor: 'rgb(40, 167, 69)',
+                label: 'Weight ({{ auth()->user()->preference->weightUnitLabel() }})',
                 borderColor: 'rgb(40, 167, 69)',
-                data: {!! $jsonWeightLbs !!}
+                backgroundColor: 'rgba(40, 167, 69, 0.3)',
+                data: {!! $jsonWeightLbs !!},
+                fill: true,
             }]
         },
 
         // Configuration options go here
-        options: {}
+        options: {
+          responsive: true,
+          tooltips: {
+            position: 'nearest',
+            mode: 'index',
+            intersect: false,
+          },
+        }
       });
     };
   </script>
