@@ -95,16 +95,34 @@ class Entry extends Model
 
   public function setWeightLbsAttribute($value)
   {
+    if (auth()->user() === null) {
+      // don't convert to preference if no auth Session
+      // used for factory class
+      $this->attributes['weight_lbs'] = $value;
+      return null;
+    }
     $this->attributes['weight_lbs'] = auth()->user()->preference->prefersImperial() ? $value : Preference::kilogramsToPounds($value);
   }
 
   public function setChestCircInAttribute($value)
   {
+    if (auth()->user() === null) {
+      // don't convert to preference if no auth Session
+      // used for factory class
+      $this->attributes['chest_circ_in'] = $value;
+      return null;
+    }
     $this->attributes['chest_circ_in'] = auth()->user()->preference->prefersImperial() ? $value : Preference::centimetersToInches($value);
   }
 
   public function setWaistCircInAttribute($value)
   {
+    if (auth()->user() === null) {
+      // don't convert to preference if no auth Session
+      // used for factory class
+      $this->attributes['waist_circ_in'] = $value;
+      return null;
+    }
     $this->attributes['waist_circ_in'] = auth()->user()->preference->prefersImperial() ? $value : Preference::centimetersToInches($value);
   }
 
