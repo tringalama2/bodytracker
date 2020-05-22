@@ -174,6 +174,10 @@
 
   <script>
     window.onload = function() {
+      // use a handwritting font
+      Chart.defaults.global.defaultFontFamily = '"Indie Flower", cursive';
+
+      // makes all charts have the 'Rough' look
       Chart.plugins.register(ChartRough);
 
       var ctx = document.getElementById('myChart').getContext('2d');
