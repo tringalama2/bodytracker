@@ -79,6 +79,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+  <script src="https://unpkg.com/roughjs@latest/bundled/rough.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-rough@latest/dist/chartjs-plugin-rough.min.js"></script>
   <script>
   /*!
    * chartjs-plugin-trendline.js
@@ -206,7 +208,7 @@
 
   <script>
     window.onload = function() {
-
+      Chart.plugins.register(ChartRough);
 
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = new Chart(ctx, {
