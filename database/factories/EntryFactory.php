@@ -8,7 +8,11 @@ use Faker\Generator as Faker;
 $factory->define(Entry::class, function (Faker $faker) {
     return [
       //'user_id' => factory(App\User::class),
-      'entry_date' => $faker->date(),
+      'entry_date' => $faker->dateTimeBetween(
+          $startDate = '-3 years',
+          $endDate = '-2 days',
+          $timezone = null,
+        ),
       'weight_lbs' => $faker->randomFloat(1, 120, 220),
       'chest_circ_in' => $faker->randomFloat(1, 10, 20),
       'waist_circ_in' => $faker->randomFloat(1, 28, 42),
