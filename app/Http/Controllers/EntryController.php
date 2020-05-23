@@ -70,6 +70,9 @@ class EntryController extends Controller
      */
     public function show(Entry $entry)
     {
+      //check that user is owner of record
+      $this->authorize('view', $entry);
+
       return view ('entries.show', [
         'entry' => $entry,
       ]);
@@ -83,6 +86,9 @@ class EntryController extends Controller
      */
     public function edit(Entry $entry)
     {
+      //check that user is owner of record
+      $this->authorize('update', $entry);
+
       return view ('entries.edit', [
         'entry' => $entry
       ]);
@@ -98,7 +104,7 @@ class EntryController extends Controller
     public function update(Request $request, Entry $entry)
     {
       //check that user is owner of record
-      // TBD
+      $this->authorize('update', $entry);
 
       $entry->update($this->validateEntry());
 
@@ -116,9 +122,7 @@ class EntryController extends Controller
     public function destroy(Entry $entry)
     {
       //check that user is owner of record
-      // TBD
-
-
+      $this->authorize('delete', $entry);
 
       $entry->delete();
 
