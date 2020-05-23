@@ -36,13 +36,20 @@
 
             <div class="card-footer">
               <span class="card-text pr-3">View</span>
-              <a href="{{ route('home') }}" class="card-link">All</a>
-              <a href="{{ route('home', ['unit' => 'days', 'interval' => 7]) }}" class="card-link">7d</a>
-              <a href="{{ route('home', ['unit' => 'weeks', 'interval' => 4]) }}" class="card-link">4w</a>
-              <a href="{{ route('home', ['unit' => 'months', 'interval' => 6]) }}" class="card-link">6m</a>
-              <a href="{{ route('home', ['unit' => 'ytd']) }}" class="card-link">YTD</a>
-              <a href="{{ route('home', ['unit' => 'years', 'interval' => 1]) }}" class="card-link">1y</a>
-              <a href="{{ route('home', ['unit' => 'years', 'interval' => 2]) }}" class="card-link">2y</a>
+              <a href="{{ route('home') }}"
+                class="card-link">All</a>
+              <a href="{{ route('home', ['unit' => 'days', 'interval' => 7]) }}"
+                class="card-link">7d</a>
+              <a href="{{ route('home', ['unit' => 'weeks', 'interval' => 4]) }}"
+                class="card-link">4w</a>
+              <a href="{{ route('home', ['unit' => 'months', 'interval' => 6]) }}"
+                class="card-link">6m</a>
+              <a href="{{ route('home', ['unit' => 'ytd']) }}"
+                class="card-link">YTD</a>
+              <a href="{{ route('home', ['unit' => 'years', 'interval' => 1]) }}"
+                class="card-link">1y</a>
+              <a href="{{ route('home', ['unit' => 'years', 'interval' => 2]) }}"
+                class="card-link">2y</a>
             </div>
         </div>
       </div>
