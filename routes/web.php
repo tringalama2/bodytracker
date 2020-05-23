@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')
+Route::get('/home/{unit?}/{interval?}', 'HomeController@index')
   ->name('home');
 
 Route::resource('entries', 'EntryController');
