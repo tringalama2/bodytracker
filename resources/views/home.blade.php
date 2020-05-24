@@ -1,60 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-header">Dashboard</div>
+<div class="container mx-auto px-6">
 
-          <div class="card-body">
-            @if (session('status'))
-              <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+      <!-- tailwind card -->
+
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+            <div class="rounded break-words bg-white shadow-sm rounded-lg overflow-hidden border border-gray-300">
+              <div class="py-3 px-6 mb-0 bg-blue-700 border-b-1 border-blue-700 text-white">Dashboard</div>
+
+              <div class="flex-auto p-6">
+                @if (session('status'))
+                  <div class="relative px-3 py-3 mb-4 border rounded text-green-darker border-green-dark bg-green-lighter" role="alert">
+                    {{ session('status') }}
+                  </div>
+                @endif
+
+                You are logged in!
               </div>
-            @endif
+              <div class="flex-auto p-6">
 
-            You are logged in!
-          </div>
-          <div class="card-body">
+              <ul>
+                <li><a href="{{ route('entries.index') }}">All Entries</a></li>
+                <li><a href="{{ route('entries.create') }}">Add New Entry</a></li>
+              </ul>
 
-          <ul>
-            <li><a href="{{ route('entries.index') }}">All Entries</a></li>
-            <li><a href="{{ route('entries.create') }}">Add New Entry</a></li>
-          </ul>
-
-          </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header text-white bg-primary">Weight Trend</div>
-
-            <div class="card-body">
-              <canvas id="myChart"></canvas>
+              </div>
             </div>
+          </div>
 
-            <div class="card-footer">
-              <span class="card-text pr-3">View</span>
-              <a href="{{ route('home') }}"
-                class="card-link">All</a>
-              <a href="{{ route('home', ['unit' => 'days', 'interval' => 7]) }}"
-                class="card-link">7d</a>
-              <a href="{{ route('home', ['unit' => 'weeks', 'interval' => 4]) }}"
-                class="card-link">4w</a>
-              <a href="{{ route('home', ['unit' => 'months', 'interval' => 6]) }}"
-                class="card-link">6m</a>
-              <a href="{{ route('home', ['unit' => 'ytd']) }}"
-                class="card-link">YTD</a>
-              <a href="{{ route('home', ['unit' => 'years', 'interval' => 1]) }}"
-                class="card-link">1y</a>
-              <a href="{{ route('home', ['unit' => 'years', 'interval' => 2]) }}"
-                class="card-link">2y</a>
-            </div>
+
+          <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+            <div class="rounded break-words bg-white shadow-sm rounded-lg overflow-hidden border border-gray-300">
+              <div class="py-3 px-6 mb-0 bg-blue-700 text-white">Weight Trend</div>
+
+              <div class="">
+                <canvas id="myChart"></canvas>
+              </div>
+
+              <div class="py-3 px-6 bg-grey-lighter border-t-1 border-grey-light">
+                <span class="mb-0 pr-2 text-xs">View</span>
+                <a href="{{ route('home') }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2">All</a>
+                <a href="{{ route('home', ['unit' => 'days', 'interval' => 7]) }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2">7d</a>
+                <a href="{{ route('home', ['unit' => 'weeks', 'interval' => 4]) }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2">4w</a>
+                <a href="{{ route('home', ['unit' => 'months', 'interval' => 6]) }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2">6m</a>
+                <a href="{{ route('home', ['unit' => 'ytd']) }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2">YTD</a>
+                <a href="{{ route('home', ['unit' => 'years', 'interval' => 1]) }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2">1y</a>
+                <a href="{{ route('home', ['unit' => 'years', 'interval' => 2]) }}"
+                  class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700">2y</a>
+              </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+
+
+
+
+
 </div>
 @endsection
 

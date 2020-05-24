@@ -20,6 +20,8 @@
     <!-- Bulma quick and dirty -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 
+    <!-- tailwindcss: need to install via npm later -->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -105,6 +107,12 @@
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="{{ asset('js/my.js') }}" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+  <style>
+    [x-cloak] {
+      display: none;
+    }
+  </style>
   @show
 </body>
 </html>
