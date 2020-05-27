@@ -6,7 +6,7 @@
       <!-- tailwind card -->
 
         <div class="flex flex-wrap -mx-4">
-          <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+          <div class="w-full lg:w-1/2 xl:w-1/3 p-4">
             <div class="rounded break-words bg-white shadow-sm rounded-lg overflow-hidden border border-gray-300">
               <div class="py-3 px-6 mb-0 bg-blue-700 border-b-1 border-blue-700 text-white">Dashboard</div>
 
@@ -31,7 +31,7 @@
           </div>
 
 
-          <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+          <div class="w-full lg:w-1/2 xl:w-1/3 p-4">
             <div class="rounded break-words bg-white shadow-sm rounded-lg overflow-hidden border border-gray-300">
               <div class="py-3 px-6 mb-0 bg-blue-700 text-white">Weight Trend</div>
 
